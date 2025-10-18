@@ -197,7 +197,7 @@ const userInfo = async (req, res) => {
     try {
         const { accessToken } = req.cookies;
         if (!accessToken) {
-            return res.json({ message: 'Unauthorized', statusCode: 401 });
+            return res.status(401).json({ message: 'Unauthorized' });
         }
         const decoded = jwt.verify(accessToken, secretKey);
         const user = await User.findById(decoded.id).select("-password");
